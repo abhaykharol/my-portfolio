@@ -1,5 +1,6 @@
 import myphoto from "./myPhoto.png";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaGithub,
   FaLinkedin,
@@ -15,6 +16,7 @@ import blinkitImg from "./assets/blinkit.png";
 
 
 export default function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="relative bg-[#070b14] text-white min-h-screen overflow-x-hidden font-sans">
       {/* Grid Background */}
@@ -72,7 +74,10 @@ export default function App() {
               </a>
             </li>
           </ul>
-          <div className="md:hidden cursor-pointer flex flex-col gap-1.5">
+          <div
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden cursor-pointer flex flex-col gap-1.5"
+          >
 
             <span className="w-8 h-[2px] bg-white rounded-full"></span>
 
@@ -80,6 +85,58 @@ export default function App() {
 
           </div>
         </div>
+
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -15, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -15, scale: 0.96 }}
+              transition={{
+                duration: 0.35,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="md:hidden px-6 pb-6 origin-top"
+            >
+              <div className="bg-[#070b14]/90 border border-white/10 rounded-3xl p-6 flex flex-col gap-5 text-gray-300 backdrop-blur-2xl shadow-[0_20px_80px_rgba(34,211,238,0.12)]">
+                <a
+                  href="#home"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-cyan-400 transition"
+                >
+                  Home
+                </a>
+
+                <a
+                  href="#about"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-cyan-400 transition"
+                >
+                  About
+                </a>
+
+                <a
+                  href="#projects"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-cyan-400 transition"
+                >
+                  Projects
+                </a>
+
+                <a
+                  href="#contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-cyan-400 transition"
+                >
+                  Contact
+                </a>
+
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+
       </nav>
 
       {/* Hero Section */}
@@ -185,7 +242,10 @@ export default function App() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="max-w-7xl mx-auto px-6 py-24">
+      <section
+        id="about"
+        className="scroll-mt-32 max-w-7xl mx-auto px-6 py-24"
+      >
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -240,7 +300,10 @@ export default function App() {
       </section >
 
       {/* Projects */}
-      < section id="about" className="max-w-7xl mx-auto px-6 py-24" >
+      <section
+        id="projects"
+        className="scroll-mt-32 max-w-7xl mx-auto px-6 py-24"
+      >t
         <h2 className="text-5xl font-black text-center mb-16">
           Featured <span className="text-cyan-400">Projects</span>
         </h2>
@@ -313,22 +376,56 @@ export default function App() {
       </section >
 
       {/* Contact */}
-      < section id="contact" className="max-w-5xl mx-auto px-6 pb-24" >
-        <div className="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-white/10 rounded-[40px] p-12 text-center backdrop-blur-xl">
-          <h2 className="text-5xl font-black mb-6">
-            Let's Work <span className="text-cyan-400">Together</span>
-          </h2>
+      <section
+        id="contact"
+        className="scroll-mt-32 max-w-7xl mx-auto px-6 pb-24"
+      >
+        <div className="grid md:grid-cols-2 gap-10 items-center bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-white/10 rounded-[40px] p-8 md:p-12 backdrop-blur-xl">
 
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-8">
-            Interested in working together or building something amazing?
-            Let's connect and create something unique.
-          </p>
+          <div>
+            <h2 className="text-5xl font-black mb-6">
+              Let's Build <span className="text-cyan-400">Together</span>
+            </h2>
 
-          <button className="mt-10 bg-cyan-400 text-black px-10 py-4 rounded-full font-bold hover:scale-105 hover:shadow-[0_0_40px_rgba(34,211,238,0.5)] transition duration-300">
-            Contact Me
-          </button>
+            <p className="text-gray-400 text-lg leading-8 mb-8">
+              Have a project idea, collaboration request, or opportunity?
+              Send me a message and let's connect.
+            </p>
+
+            <div className="space-y-4 text-gray-300">
+              <p>Email: abhaykharol9116@gmail.com</p>
+              <p>Location: Jaipur, Rajasthan, India</p>
+            </div>
+          </div>
+
+          <form className="space-y-5">
+            <input
+              type="text"
+              placeholder="Your Name"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-cyan-400 transition"
+            />
+
+            <input
+              type="email"
+              placeholder="Your Email"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-cyan-400 transition"
+            />
+
+            <textarea
+              rows="5"
+              placeholder="Your Message"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-cyan-400 transition resize-none"
+            ></textarea>
+
+            <button
+              type="button"
+              className="w-full bg-cyan-400 text-black py-4 rounded-2xl font-bold hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(34,211,238,0.4)] transition duration-300"
+            >
+              Send Message
+            </button>
+          </form>
         </div>
-      </section >
+      </section>
 
 
       {/* Footer */}
