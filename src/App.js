@@ -5,7 +5,6 @@ import {
   FaLinkedin,
   FaInstagram,
   FaArrowRight,
-  FaBars,
 } from "react-icons/fa";
 import { TypeAnimation } from "react-type-animation";
 
