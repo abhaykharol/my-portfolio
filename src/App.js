@@ -49,16 +49,16 @@ export default function App() {
       ></div>
 
 
-      <div className="relative bg-[#070b14] text-white min-h-screen overflow-x-hidden font-sans">
+      <div className="relative bg-[#070b14] text-white min-h-[100vh] overflow-x-hidden font-sans">
 
 
         {/* Grid Background */}
         <div className="absolute inset-0 -z-10 h-full w-full bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:40px_40px]"></div>
 
         {/* Glow Effect */}
-        <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] bg-cyan-500 opacity-20 blur-[150px] rounded-full"></div>
+        <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-cyan-500 opacity-20 blur-[150px] rounded-full"></div>
 
-        <div className="absolute bottom-[-100px] right-[-100px] w-[400px] h-[400px] bg-purple-500 opacity-20 blur-[150px] rounded-full"></div>
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-purple-500 opacity-20 blur-[150px] rounded-full"></div>
 
         <div className="pointer-events-none absolute inset-0 z-0">
           <div className="absolute top-[20%] left-[10%] w-[300px] h-[300px] bg-cyan-500/20 blur-[120px] rounded-full"></div>
@@ -661,7 +661,7 @@ export default function App() {
                     </p>
 
                     <h4 className="text-lg font-semibold">
-                      abhaykharol****@gmail.com
+                      abhaykharol9116@gmail.com
                     </h4>
                   </div>
 
@@ -671,7 +671,7 @@ export default function App() {
                     </p>
 
                     <h4 className="text-lg font-semibold">
-                      Jaipur, Rajasthan
+                      Jaipur , Rajasthan ( 302018 )
                     </h4>
                   </div>
 
@@ -736,6 +736,9 @@ export default function App() {
 
           <a
             href="https://github.com/abhaykharol"
+            target="_blank"
+            rel="noreferrer"
+
             className="w-14 h-14 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-center text-xl hover:scale-110 hover:text-cyan-300 hover:border-cyan-400/40 transition duration-300"
           >
             <FaGithub />
@@ -743,6 +746,8 @@ export default function App() {
 
           <a
             href="https://www.linkedin.com/in/abhay-kharol-541970327/"
+            target="_blank"
+            rel="noreferrer"
             className="w-14 h-14 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-center text-xl hover:scale-110 hover:text-cyan-300 hover:border-cyan-400/40 transition duration-300"
           >
             <FaLinkedin />
@@ -750,6 +755,8 @@ export default function App() {
 
           <a
             href="https://www.instagram.com/chouhan_abhay_/?hl=en"
+            target="_blank"
+            rel="noreferrer"
             className="w-14 h-14 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-center text-xl hover:scale-110 hover:text-cyan-300 hover:border-cyan-400/40 transition duration-300"
           >
             <FaInstagram />
@@ -759,7 +766,7 @@ export default function App() {
 
 
         {/* FOOTER */}
-        <footer className="relative border-t border-white/10 mt-32">
+        <footer className="relative border-t border-white/10">
 
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-purple-500/5"></div>
 
