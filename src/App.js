@@ -1,18 +1,21 @@
 import myphoto from "./myPhoto.png";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
 import {
+  FaReact,
   FaGithub,
   FaLinkedin,
   FaInstagram,
   FaArrowRight,
 } from "react-icons/fa";
+
+import { SiTailwindcss, SiNextdotjs } from "react-icons/si";
 import { TypeAnimation } from "react-type-animation";
 
 import weatherImg from "./assets/weather.png";
 import PortfolioImg from "./assets/Portfolio.png";
 import blinkitImg from "./assets/blinkit.png";
-// import { FaBars } from "react-icons/fa";
 
 
 export default function App() {
@@ -38,6 +41,22 @@ export default function App() {
 
   }, []);
 
+
+  // MEU EFFECT
+  useEffect(() => {
+
+    const closeMenuOnScroll = () => {
+      setMenuOpen(false);
+    };
+
+    window.addEventListener("scroll", closeMenuOnScroll);
+
+    return () => {
+      window.removeEventListener("scroll", closeMenuOnScroll);
+    };
+
+  }, []);
+
   return (
     <>
 
@@ -49,7 +68,12 @@ export default function App() {
       ></div>
 
 
-      <div className="relative bg-[#070b14] text-white min-h-[100vh] overflow-x-hidden font-sans">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="relative bg-[#070b14] text-white min-h-[100vh] overflow-x-hidden font-sans"
+      >
 
 
         {/* Grid Background */}
@@ -78,7 +102,7 @@ export default function App() {
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase()}`}
-                    className="hover:text-white transition"
+                    className="relative text-gray-300 hover:text-white transition after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-cyan-400 after:transition-all after:duration-300 hover:after:w-full"
                   >
                     {item}
                   </a>
@@ -92,8 +116,69 @@ export default function App() {
             >
               Hire Me <FaArrowRight />
             </a>
+
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              onMouseEnter={() => setMenuOpen(true)}
+              onMouseLeave={() => setMenuOpen(false)}
+              className="md:hidden z-50 group relative w-12 h-12 rounded-2xl bg-white/[0.05] backdrop-blur-2xl flex items-center justify-center transition duration-300"
+            >
+
+              <span
+                className={`absolute h-[2px] w-6 rounded-full bg-white transition duration-300 ${menuOpen
+                  ? "rotate-45 translate-y-0"
+                  : "-translate-y-1.5"
+                  }`}
+              ></span>
+
+              <span
+                className={`absolute h-[2px] rounded-full bg-cyan-400 transition duration-300 ${menuOpen
+                  ? "-rotate-45 translate-y-0 w-6"
+                  : "translate-y-1.5 w-4"
+                  }`}
+              ></span>
+
+            </button>
+
+
           </div>
+
+
         </nav>
+
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              onMouseEnter={() => setMenuOpen(true)}
+              onMouseLeave={() => setMenuOpen(false)}
+              initial={{ opacity: 0, y: -10, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.96 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="fixed top-[92px] right-6 z-40 md:hidden"
+            >
+              <div className="relative w-[230px] overflow-hidden rounded-[28px] border border-white/[0.06] bg-[#0b1220]/90 backdrop-blur-3xl p-2 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+                {["Home", "About", "Projects", "Contact"].map((item) => (
+                  <a
+                    key={item}
+                    href={`#${item.toLowerCase()}`}
+                    onClick={() => setMenuOpen(false)}
+                    className="group relative flex items-center rounded-[18px] px-5 py-4 text-[15px] font-semibold tracking-tight text-gray-300 transition duration-300 hover:bg-white/[0.05] hover:text-white"
+                  >
+                    <span className="relative z-10">
+                      {item}
+                    </span>
+
+                    <div className="absolute left-0 top-0 h-full w-0 rounded-[18px] bg-gradient-to-r from-cyan-400/10 to-purple-400/10 transition-all duration-300 group-hover:w-full"></div>
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+
+
 
         {/* Hero */}
         <section
@@ -359,24 +444,27 @@ export default function App() {
             {[
               {
                 title: "Frontend",
+                icon: <FaReact />,
                 skills: ["HTML", "CSS", "JavaScript", "React"],
               },
 
               {
                 title: "Styling",
+                icon: <SiTailwindcss />,
                 skills: ["Tailwind CSS", "Responsive UI", "Animations"],
               },
 
               {
                 title: "Tools",
+                icon: <FaGithub />,
                 skills: ["GitHub", "VS Code", "Figma"],
               },
 
               {
                 title: "Learning",
+                icon: <SiNextdotjs />,
                 skills: ["Next.js", "UI/UX", "Advanced React"],
               },
-
             ].map((item, index) => (
 
               <motion.div
@@ -399,7 +487,9 @@ export default function App() {
 
                 <div className="relative z-10">
 
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-400 to-purple-500 mb-8"></div>
+                  <div className="w-16 h-16 rounded-2xl bg-white/[0.05] flex items-center justify-center text-3xl text-cyan-300 mb-8 backdrop-blur-xl">
+                    {item.icon}
+                  </div>
 
                   <h3 className="text-3xl font-black mb-8">
                     {item.title}
@@ -789,28 +879,28 @@ export default function App() {
 
               <a
                 href="#home"
-                className="text-gray-400 hover:text-white transition"
+                className="relative text-gray-400 hover:text-white transition after:absolute after:left-0 after:-bottom-1 after:h-[1.5px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
               >
                 Home
               </a>
 
               <a
                 href="#about"
-                className="text-gray-400 hover:text-white transition"
+                className="relative text-gray-400 hover:text-white transition after:absolute after:left-0 after:-bottom-1 after:h-[1.5px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
               >
                 About
               </a>
 
               <a
                 href="#projects"
-                className="text-gray-400 hover:text-white transition"
+                className="relative text-gray-400 hover:text-white transition after:absolute after:left-0 after:-bottom-1 after:h-[1.5px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
               >
                 Projects
               </a>
 
               <a
                 href="#contact"
-                className="text-gray-400 hover:text-white transition"
+                className="relative text-gray-400 hover:text-white transition after:absolute after:left-0 after:-bottom-1 after:h-[1.5px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
               >
                 Contact
               </a>
@@ -824,7 +914,7 @@ export default function App() {
           </div>
 
         </footer>
-      </div>
+      </motion.div>
 
     </>
   );
